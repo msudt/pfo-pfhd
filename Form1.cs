@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
+using System.Security.Cryptography.X509Certificates;
 namespace ClientPFHD
 {
     public partial class FormClientPFHD : Form
@@ -22,11 +23,24 @@ namespace ClientPFHD
             InitializeComponent();
         }
 
+        public class MyPolicy : ICertificatePolicy
+        {
+            public bool CheckValidationResult(ServicePoint srvPoint,
+              X509Certificate certificate, WebRequest request,
+              int certificateProblem)
+            {
+                //Return True to force the certificate to be accepted.
+                return true;
+            }
+        }
+
         public static HttpWebResponse PostMethod(string postUrl, NameValueCollection nvc, string filename, FileStream fileStream)
         {
             string boundary = "--" + DateTime.Now.Ticks.ToString("x");
             byte[] boundarybytes = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\n");
-            
+
+            System.Net.ServicePointManager.CertificatePolicy = new MyPolicy();
+
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(postUrl);
             request.ContentType = "multipart/form-data; boundary=" + boundary;
             request.Method = "POST";
