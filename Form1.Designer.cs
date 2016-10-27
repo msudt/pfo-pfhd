@@ -83,10 +83,14 @@
             // 
             this.uriCB.FormattingEnabled = true;
             this.uriCB.Items.AddRange(new object[] {
-            "incomingPlan",
-            "expensePlan",
+            "IcomePlan",
+            "LimitPlan",
+            "ExpenditurePlan",
             "finActivityPlan",
-            "extraValue"});
+            "finActivityPlan2017",
+            "extraValue",
+            "IncomePaymentDoc",
+            "ExpensePaymentDoc"});
             this.uriCB.Location = new System.Drawing.Point(100, 77);
             this.uriCB.Name = "uriCB";
             this.uriCB.Size = new System.Drawing.Size(212, 21);
@@ -180,17 +184,17 @@
             // 
             // tBresponse
             // 
-            this.tBresponse.Location = new System.Drawing.Point(681, 40);
+            this.tBresponse.Location = new System.Drawing.Point(748, 40);
             this.tBresponse.Multiline = true;
             this.tBresponse.Name = "tBresponse";
             this.tBresponse.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tBresponse.Size = new System.Drawing.Size(503, 359);
+            this.tBresponse.Size = new System.Drawing.Size(436, 359);
             this.tBresponse.TabIndex = 15;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(693, 20);
+            this.label6.Location = new System.Drawing.Point(745, 9);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(37, 13);
             this.label6.TabIndex = 16;
