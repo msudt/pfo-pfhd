@@ -53,7 +53,6 @@
             this.loginTB.Name = "loginTB";
             this.loginTB.Size = new System.Drawing.Size(212, 20);
             this.loginTB.TabIndex = 0;
-            this.loginTB.Text = "integrationUser";
             // 
             // passwordTB
             // 
@@ -61,7 +60,6 @@
             this.passwordTB.Name = "passwordTB";
             this.passwordTB.Size = new System.Drawing.Size(212, 20);
             this.passwordTB.TabIndex = 2;
-            this.passwordTB.Text = "Cit159632";
             // 
             // label1
             // 
