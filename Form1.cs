@@ -166,12 +166,14 @@ namespace ClientPFHD
         private void buttonSend_Click(object sender, EventArgs e)
         {
 
-            string host, ApiUrl;
+            string host, hosts, ApiUrl;
             //string boundaryText = "--" + DateTime.Now.Ticks.ToString("x");
             //byte[] boundarybytes = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundaryText + "\r\n");
 
             host = "http://pfhd.edu.ru";
-            ApiUrl = host + this.methodCB.Text;
+            hosts = "https://pfhd.edu.ru";
+            //ApiUrl = host + this.methodCB.Text;
+            ApiUrl = hosts + this.methodCB.Text;
 
             NameValueCollection myCol = new NameValueCollection();
             myCol.Add("AC.Login", this.loginTB.Text);
