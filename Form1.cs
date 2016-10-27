@@ -22,7 +22,7 @@ namespace ClientPFHD
             InitializeComponent();
         }
 
-        public static HttpWebResponse PostMethod(string postedData, string postUrl, string boundary, byte[] boundarybytes, NameValueCollection nvc, string filename, string pathfile, FileStream fileStream)
+        public static HttpWebResponse PostMethod(string postedData, string postUrl, string boundary, byte[] boundarybytes, NameValueCollection nvc, string filename, FileStream fileStream)
         {
             //string boundary = "--" + DateTime.Now.Ticks.ToString("x");
             //byte[] boundarybytes = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\n");
@@ -184,7 +184,7 @@ namespace ClientPFHD
 
             FileStream fileStream = new FileStream(openFileDialog1.FileName, FileMode.Open, FileAccess.Read);
 
-            var response = PostMethod(postedData,ApiUrl,boundaryText,boundarybytes,myCol,this.filenameTB.Text, this.pathFileTB.Text,fileStream);
+            var response = PostMethod(postedData,ApiUrl,boundaryText,boundarybytes,myCol,this.filenameTB.Text,fileStream);
             if (response != null)
             {
                 var strreader = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
