@@ -22,17 +22,14 @@ namespace ClientPFHD
             InitializeComponent();
         }
 
-        public static HttpWebResponse PostMethod(string postedData, string postUrl, string boundary, byte[] boundarybytes, NameValueCollection nvc, string filename, FileStream fileStream)
+        public static HttpWebResponse PostMethod(string postUrl, NameValueCollection nvc, string filename, FileStream fileStream)
         {
-            //string boundary = "--" + DateTime.Now.Ticks.ToString("x");
-            //byte[] boundarybytes = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\n");
-
-
+            string boundary = "--" + DateTime.Now.Ticks.ToString("x");
+            byte[] boundarybytes = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\n");
+            
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(postUrl);
             request.ContentType = "multipart/form-data; boundary=" + boundary;
-            //request.ContentType = "multipart/form-data; boundary=--8ba90904-d8f4-4a64-9e80-8e6e87983e6f--";
             request.Method = "POST";
-            //request.Credentials = CredentialCache.DefaultCredentials;
             request.Host = "pfhd.edu.ru";
             request.KeepAlive = false;
             
@@ -155,27 +152,12 @@ namespace ClientPFHD
         private void buttonSend_Click(object sender, EventArgs e)
         {
 
-            string postedData,host, ApiUrl;
-            string boundaryText = "--" + DateTime.Now.Ticks.ToString("x");
-            byte[] boundarybytes = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundaryText + "\r\n");
+            string host, ApiUrl;
+            //string boundaryText = "--" + DateTime.Now.Ticks.ToString("x");
+            //byte[] boundarybytes = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundaryText + "\r\n");
 
             host = "http://pfhd.edu.ru";
             ApiUrl = host + this.methodCB.Text;
-            //boundaryText = "--8ba90904-d8f4-4a64-9e80-8e6e87983e6f";
-            postedData = boundaryText+ "\r\n";
-            postedData += "Content-Disposition: form-data; name=\"AC.Login\"\r\n\r\n";
-            postedData += this.loginTB.Text + "\r\n";
-            postedData += boundaryText + "\r\n";
-            postedData += "Content-Disposition: form-data; name =\"AC.Password\"\r\n\r\n";
-            postedData += this.passwordTB.Text + "\r\n";
-            postedData += boundaryText + "\r\n";
-            postedData += "Content-Disposition: form-data; name =\"URI\"\r\n\r\n";
-            postedData += this.uriCB.Text + "\r\n";
-            postedData += boundaryText + "\r\n";
-            postedData += "Content-Disposition: form-data; name =\"content\"; filename=\""+ this.filenameTB.Text  + "\"\r\n\r\n";
-            postedData += "Content-Type: text/xml\r\n\r\n";
-            postedData += this.textBoxXML.Text;
-            postedData += boundaryText + "--\r\n";
 
             NameValueCollection myCol = new NameValueCollection();
             myCol.Add("AC.Login", this.loginTB.Text);
@@ -184,7 +166,7 @@ namespace ClientPFHD
 
             FileStream fileStream = new FileStream(openFileDialog1.FileName, FileMode.Open, FileAccess.Read);
 
-            var response = PostMethod(postedData,ApiUrl,boundaryText,boundarybytes,myCol,this.filenameTB.Text,fileStream);
+            var response = PostMethod(ApiUrl,myCol,this.filenameTB.Text,fileStream);
             if (response != null)
             {
                 var strreader = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
